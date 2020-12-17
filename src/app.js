@@ -28,7 +28,7 @@ app.post("/mario",async (req,res)=>{
     const newMario=req.body;
     if(isNullOrundefined(newMario.name) || isNullOrundefined(newMario.weight))
     {
-        res.status(400).send(({message: 'either name or weight is missing'});
+        res.status(400).send({message: 'either name or weight is missing'});
     }
     else
     {
@@ -42,16 +42,16 @@ app.patch("/mario/:id",async (req,res)=>{
     const newMario=req.body;
     try{
         const existingData=await marioModel.findById(id);
-        if(isNullOrundefined(existingData.name) && isNullOrundefined(existingData.weight)){
+        if(isNullOrundefined(newMario.name) && isNullOrundefined(newMario.weight)){
             res.status(400).send({message: error.message});
         }
         else
         {
-            if(!isNullOrundefined(existingData.name))
+            if(!isNullOrundefined(newMario.name))
             {
                 existingData.name=newMario.name;
             }
-            if(!isNullOrundefined(existingData.weight))
+            if(!isNullOrundefined(newMario.weight))
             {
                 existingData.weight=newMario.weight;
             }
